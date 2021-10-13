@@ -11,7 +11,7 @@
     die("There was a problem connecting to the MySQL database: ".mysqli_connect_error());
 
   } else {
-    echo 'sucessfull\n';
+    echo 'connection to new database was sucessfull\n';
   }
 
 /*
