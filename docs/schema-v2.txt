@@ -1,0 +1,28 @@
+profile ( actID, fname, lname, dob, height, weight, gender, weightGoal );
+
+dateLog ( dateID, actID, date );
+
+sleepLog ( sleepID, actID, dateID, sleepTime, quality );
+
+activity ( activityID, type, intensity, duration, calsBurned  );
+
+	activityLog ( activity_logID, actID, dateID, activityID, typeEntry, intensityEntry, durationEntry, calsBurnedEntry );
+	
+food ( foodID, foodType, quantity, measurement, calories, protein, fat, carbs );
+
+	foodLog ( food_logID, actID, dateID, foodID, foodTypeEntry, quantityEntry, measurementEntry, caloriesEntry, proteinEntry, fatEntry, carbsEntry );
+
+
+
+
+Each user has a profile. The profile shows a daily journal of sleep, nutrition and fitness habits. Each food, exercise or sleep event logged is assocaited with a date. 
+
+SLEEP:
+Sleep is added each day. You can specify quality and duration to track sleeping  habits.
+
+
+FOOD:
+You can enter a brand new food including its nutrition facts and portion size into the foodDictionary() and then this will log in into the daily foodLog(). If the food type and measurement type already exists in the foodDictionary(), you can enter the amount to calculate nutrition facts and enter it into the foodLog() for the day.
+
+EXERCISE:
+You can enter a new exercise type including its duration and intensity into the fitnessDictionary() and then into the daily fitnessLog(). If this exercise and exercise intensity already exists, you can enter it into the fitnessLog() and specify the duration to calculate energy spent and enter it into the fitnessLog().
