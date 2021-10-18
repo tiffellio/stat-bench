@@ -42,7 +42,7 @@
       $fat = $_POST['fat'];
       $carbs = $_POST['carbs'];
 
-      $query = "INSERT INTO `stat_bench_3497853`.`food`(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES(NULL, '$type', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
+      $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$type', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
 
       $run = mysqli_query($link, $query) or die(mysqli_error($link)); //NOTE: you have to give mysql_error the connection object
 
