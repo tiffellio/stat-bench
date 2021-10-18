@@ -26,7 +26,7 @@
             <span id="stat">STAT</span>
             <span id="bench">BENCH</span>
             </div>
-            <div class="sidebar-item"><a href="../index.html">Dashboard</a></div>
+            <div class="sidebar-item"><a href="../index.php">Dashboard</a></div>
             <div class="sidebar-item" id="homepage"><a href="nutrition.html">Nutrition</a></div>
             <div class="sidebar-item"><a href="../exercise/exercise.html">Exercise</a></div>
             <div class="sidebar-item"><a href="../sleep/sleep.html">Sleep</a></div>
@@ -39,12 +39,12 @@
             <!-- add a new food item -->
             <div id="sub-item-1">
                 <form action="create-food.php" method="POST">
-                    <input type="text" id="food-type-add" placeholder="Ex: Peach, Steamed Rice, Chicken Thigh" /><br>
+                    <input type="text" name="type" id="food-type-add" placeholder="Ex: Peach, Steamed Rice, Chicken Thigh" /><br>
                     <label> Type </label> <br>
 
-                    <input type="number" id="food-quantity-add" min="0" max="5000"/>
+                    <input type="number" name="quantity" id="food-quantity-add" min="0" max="5000"/>
 
-                    <select name="unit-add">
+                    <select name="measurement" id="unit-add">
                       <option value="none"> Select a unit </option>
                         <option value="cups"> cups </option>
                         <option value="mls"> mls </option>
@@ -58,19 +58,19 @@
 
                     <label> Quantity </label> <br>
 
-                    <input type="text" id="cals-add" placeholder="kcal" /> <br>
+                    <input type="text" id="cals-add" name="calories" placeholder="kcal" /> <br>
                     <label> Calories </label> <br>
 
-                    <input type="text" id="protein-add" placeholder="g" /> <br>
+                    <input type="text" id="protein-add" name="protein" placeholder="g" /> <br>
                     <label> Protein </label> <br>
 
-                    <input type="text" id="fat-add" placeholder="g" /> <br>
+                    <input type="text" id="fat-add" name="fat" placeholder="g" /> <br>
                     <label> Fat </label> <br>
 
-                    <input type="text" id="carbs-add" placeholder="g" /> <br>
+                    <input type="text" id="carbs-add" name="carbs" placeholder="g" /> <br>
                     <label> Carbs </label> <br>
 
-                    <button type="submit" name="submit"> + LOG! </button>
+                    <button type="submit" name="submit"> + Create! </button>
                 </form>
             </div> <!-- end sub-item-1 -->
 

@@ -16,7 +16,25 @@
     die("There was a problem connecting to the MySQL database: ".mysqli_connect_error());
 
   } else {
-    echo 'connection to new database was sucessfull\n';
+    echo 'connection to new database was sucessful';
   }
+
+  if (isset($_POST['submit'])){
+
+    // Check if form boxes are empty or not first
+    if(!empty($_POST['type']) &&
+    !empty($_POST['quantity']) &&
+    !empty($_POST['measurement']) &&
+    !empty($_POST['calories']) &&
+    !empty($_POST['protein']) &&
+    !empty($_POST['fat']) &&
+    !empty($_POST['carbs'])){
+      echo "success";
+  } else {
+    echo "all fields are required";
+  }
+
+  }
+
 
 ?>
