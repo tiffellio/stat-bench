@@ -30,6 +30,29 @@
     !empty($_POST['fat']) &&
     !empty($_POST['carbs'])){
       echo "success";
+
+      //INSERT INTO `stat_bench_3497853`.`food` 
+      //(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) 
+      //VALUES (NULL, 'acorn squash', '1', '6', '172', '3', '0', '45');
+
+      $foodType = $_POST['type'] ;
+      $quanity = $_POST['quantity'];
+      $measurement = $_POST['measurement'];
+      $calories = $_POST['calories'];
+      $protein = $_POST['protein'];
+      $fat = $_POST['fat'];
+      $carbs = $_POST['carbs'];
+
+      $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES(NULL, `$type`, `$quantity`, `$measurement`, `$calories`, `$protein`, `$fat`, `$carbs`) ";
+
+      $run = mysqli_query($link, $query) or die(mysqli_error());
+
+      if($run){
+        echo "form submitted success";
+      } else {
+        echo "form not submitted";
+      }
+      
   } else {
     echo "all fields are required";
   }
