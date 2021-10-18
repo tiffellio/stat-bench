@@ -29,7 +29,6 @@
     !empty($_POST['protein']) &&
     !empty($_POST['fat']) &&
     !empty($_POST['carbs'])){
-      echo "success";
 
       //INSERT INTO `stat_bench_3497853`.`food` 
       //(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) 
@@ -43,9 +42,9 @@
       $fat = $_POST['fat'];
       $carbs = $_POST['carbs'];
 
-      $query = "INSERT INTO `stat_bench_3497853`.`food`(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES(NULL, `$type`, `$quantity`, `$measurement`, `$calories`, `$protein`, `$fat`, `$carbs`) ";
+      $query = "INSERT INTO `stat_bench_3497853`.`food`(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES(NULL, `$type`, `$quantity`, `$measurement`, `$calories`, `$protein`, `$fat`, `$carbs`)";
 
-      $run = mysqli_query($link, $query) or die(mysqli_error());
+      $run = mysqli_query($link, $query) or die(mysqli_error($link)); //NOTE: you have to give mysql_error the connection object
 
       if($run){
         echo "form submitted success";
