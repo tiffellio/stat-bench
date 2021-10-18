@@ -38,7 +38,7 @@
 
             <!-- add a new food item -->
             <div id="sub-item-1">
-                <form>
+                <form action="create-food.php" method="POST">
                     <input type="text" id="food-type-add" placeholder="Ex: Peach, Steamed Rice, Chicken Thigh" /><br>
                     <label> Type </label> <br>
 
@@ -52,7 +52,8 @@
                         <option value="teaspoons"> teaspoon(s) </option>
                         <option value="grams"> gram(s) </option>
                         <option value="oz"> ounce(s) </option>
-                        <option value="serving"> serving </option>
+                        <option value="serving"> serving </option >
+                                          <!-- maybe create an other/create category later??-->
                     </select> <br>
 
                     <label> Quantity </label> <br>
@@ -69,7 +70,7 @@
                     <input type="text" id="carbs-add" placeholder="g" /> <br>
                     <label> Carbs </label> <br>
 
-                    <button> + LOG! </button>
+                    <button type="submit" name="submit"> + LOG! </button>
                 </form>
             </div> <!-- end sub-item-1 -->
 
