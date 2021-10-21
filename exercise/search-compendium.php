@@ -10,9 +10,9 @@
     echo "Successfully connected to database.";
   }
 
-  $usr_inp = $_GET['q'];
+  $id = $_GET['q'];
 
-  $qry = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$usr_inp."%' limit 100";
+  $qry = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$id."%' limit 100";
   $result = $link->query($qry);
 
   if($result->num_rows > 0){
