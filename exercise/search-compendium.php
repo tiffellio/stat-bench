@@ -11,7 +11,7 @@
   }
 
   $qry = "SELECT specificActivities FROM activity limit 10";
-  $result = $conn->query($qry);
+  $result = $link->query($qry);
 
   if($result->num_rows > 0){
 
