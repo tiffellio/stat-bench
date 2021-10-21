@@ -10,7 +10,10 @@
     echo "Successfully connected to database.";
   }
 
-  $qry = "SELECT specificActivities FROM activity";
+  $id = $_GET['q'];
+
+
+  $qry = "SELECT specificActivities FROM activity WHERE specificActivities like '%".$id."%'";
   $result = $link->query($qry);
 
   if($result->num_rows > 0){
