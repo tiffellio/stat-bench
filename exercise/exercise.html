@@ -9,6 +9,13 @@
     <link href='https://fonts.googleapis.com/css?family=Pontano Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.autocomplete.js"></script>
+
+    <script>
+      jQuery(function(){
+        $("#search").autocomplete("search.php");
+      });
+    </script>
 
 </head>
 <body>
@@ -51,7 +58,7 @@
                 <label> Duration </label> <br>
 
 
-                <button type="submit"> + LOG! </button> <br>
+                <button type="submit" value="submit"> + LOG! </button> <br>
 
             </form>
         </div>
