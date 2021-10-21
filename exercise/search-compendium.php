@@ -10,7 +10,7 @@
     echo "Successfully connected to database.";
   }
 
-  $qry = "SELECT specificActivities FROM activity limit 10";
+  $qry = "SELECT specificActivities FROM activity";
   $result = $link->query($qry);
 
   if($result->num_rows > 0){
