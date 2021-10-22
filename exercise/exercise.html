@@ -8,14 +8,44 @@
     <link rel="stylesheet" href="exercise-grid.css" />
     <link href='https://fonts.googleapis.com/css?family=Pontano Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- jQuery UI -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script>
-      jQuery(function(){
-        $("#search").autocomplete("search-compendium.php");
-      });
+    $( function() {
+      // Single Select
+      $( "#autocomplete" ).autocomplete({
+      source: function( request, response ) {
+       // Fetch data
+       $.ajax({
+        url: "search-compendium.php",
+        type: 'post',
+        dataType: "json",
+        data: {
+         search: request.term
+        },
+        success: function( data ) {
+         response( data );
+        }
+       });
+      },
+      select: function (event, ui) {
+         // Set selection
+         $('#autocomplete').val(ui.item.label); // display the selected text
+         $('#selectuser_id').val(ui.item.value); // save selected id to input
+         return false;
+      },
+      focus: function(event, ui){
+         $( "#autocomplete" ).val( ui.item.label );
+         $( "#selectuser_id" ).val( ui.item.value );
+         return false;
+       },
+    });
+
     </script>
 
 </head>

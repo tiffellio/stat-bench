@@ -10,6 +10,7 @@
     echo "Successfully connected to database.";
   }
 
+/*
   $id = $_GET['q'];
 
   $qry = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$id."%' limit 100";
@@ -26,5 +27,23 @@
     echo "0 results";
 
   }
-  $link->close();
+  $link->close();*/
+
+
+  // function from: https://makitweb.com/jquery-ui-autocomplete-with-php-and-ajax/
+  if(isset($_POST['search'])){
+   $search = mysqli_real_escape_string($link,$_POST['search']);
+
+   $query = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$search."%' limit 100";
+   $result = mysqli_query($link,$query);
+
+   $response = array();
+   while($row = mysqli_fetch_array($result) ){
+     $response[] = array("value"=>$row['id'],"label"=>$row['name']);
+   }
+
+   echo json_encode($response);
+  }
+
+  exit;
 ?>
