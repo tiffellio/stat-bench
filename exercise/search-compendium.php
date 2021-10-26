@@ -14,17 +14,19 @@
   $searchTerm = $_GET['term'];
 
   // fetch matched data from the database
-  $query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' AND limit 100");
+  $query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 100");
 
 
   // generate array with activity data
   $activityData = array();
   if($query->num_rows > 0) {
     while($row = $query->fetch_assoc()){
-      //$data['id'] = $row['metCode'];
+      $data['id'] = $row['metCode'];
       $data['value'] = $row['specificActivities'];
       array_push($activityData, $data);
     }
+  } else {
+    echo "no data";
   }
 
 echo json_encode($activityData);
