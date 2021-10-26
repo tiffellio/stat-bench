@@ -39,7 +39,7 @@
 
    $response = array();
    while($row = mysqli_fetch_array($result) ){
-     $response[] = array("value"=>$row['id'],"label"=>$row['name']);
+     $response[] = array("label"=>$row['name']);
    }
 
    echo json_encode($response);
