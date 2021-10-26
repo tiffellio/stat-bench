@@ -21,7 +21,7 @@
   $activityData = array();
   if($query->num_rows > 0) {
     while($row = $query->fetch_assoc()){
-      $data['id'] = $row['metCode'];
+      //$data['id'] = $row['metCode'];
 
       $data['value'] = $row['specificActivities'];
       array_push($activityData, $data);
