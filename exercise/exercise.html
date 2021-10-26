@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <script>
-    $( function() {
+    /*$( function() {
       // Single Select
       $( "#autocomplete" ).autocomplete({
 
@@ -49,8 +49,37 @@
              },
 
          });
-         
-     });
+
+     });*/
+     $( function() {
+   var availableTags = [
+     "ActionScript",
+     "AppleScript",
+     "Asp",
+     "BASIC",
+     "C",
+     "C++",
+     "Clojure",
+     "COBOL",
+     "ColdFusion",
+     "Erlang",
+     "Fortran",
+     "Groovy",
+     "Haskell",
+     "Java",
+     "JavaScript",
+     "Lisp",
+     "Perl",
+     "PHP",
+     "Python",
+     "Ruby",
+     "Scala",
+     "Scheme"
+   ];
+   $( "#tags" ).autocomplete({
+     source: availableTags
+   });
+ } );
 
     </script>
 
@@ -79,8 +108,8 @@
         <div class="item" id="exercise-form">
             <form>
 
-                <input type="text" id="autocomplete"/>  <br>
-                <label> Type </label> <br> <!-- Search -->
+                <input type="text" id="tags"/>  <br>
+                <label for="tags"> Type </label> <br> <!-- Search -->
 
 
                 <select name="intensity">
