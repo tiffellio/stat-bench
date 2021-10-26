@@ -15,64 +15,17 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <!-- initialize autocomplete -->
     <script>
-    $( function() {
-      // Single Select
-      $( "#autocomplete" ).autocomplete({
+    $(function() {
 
-          source: function( request, response ) {
-               // Fetch data
-               $.ajax({
-                  url: "search-compendium.php",
-                  type: 'post',
-                  dataType: "json",
-                  data: {
-                  search: request.term
-                },
-                success: function( data ) {
-                   response( data );
-                }
-               });
-            },
+        $('#skill_input').autocomplete({
 
-            focus: function(event, ui){
-               $( "#autocomplete" ).val( ui.item.label );
-               $( "#selectuser_id" ).val( ui.item.value );
-               return false;
-             },
+            source: 'search-compendium.php'
 
-         });
+        });
 
-     });/*
-     $( function() {
-   var availableTags = [
-     "ActionScript",
-     "AppleScript",
-     "Asp",
-     "BASIC",
-     "C",
-     "C++",
-     "Clojure",
-     "COBOL",
-     "ColdFusion",
-     "Erlang",
-     "Fortran",
-     "Groovy",
-     "Haskell",
-     "Java",
-     "JavaScript",
-     "Lisp",
-     "Perl",
-     "PHP",
-     "Python",
-     "Ruby",
-     "Scala",
-     "Scheme"
-   ];
-   $( "#tags" ).autocomplete({
-     source: availableTags
-   });
- } );*/
+    });
 
     </script>
 
@@ -101,7 +54,7 @@
         <div class="item" id="exercise-form">
             <form>
 
-                <input type="text" id="tags"/>  <br>
+                <input type="text" id="skill_input"/>  <br>
                 <label for="tags"> Type </label> <br> <!-- Search -->
 
 

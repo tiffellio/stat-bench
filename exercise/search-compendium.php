@@ -2,48 +2,30 @@
 
   require_once("../private/dbinfo.inc.php");
 
-  $link = mysqli_connect($host, $username, $password, $db_name);
+  $db = new mysqli($host, $username, $password, $db_name);
 
-  if(mysqli_connect_error()){
+  if($db->connect_error){
     echo "Failed to connect to database.";
   } else {
     echo "Successfully connected to database.";
   }
 
-/*
-  $id = $_GET['q'];
+  // get search term
+  $searchTerm = $_GET['term'];
 
-  $qry = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$id."%' limit 100";
-  $result = $link->query($qry);
-
-  if($result->num_rows > 0){
-
-      while($row = $result->fetch_assoc()) {
-        echo $row["specificActivities"]."<br>";
-      }
-
-  } else {
-
-    echo "0 results";
-
-  }
-  $link->close();*/
+  // fetch matched data from the database
+  $query = $db->query("SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 100")
 
 
-  // function from: https://makitweb.com/jquery-ui-autocomplete-with-php-and-ajax/
-  if(isset($_POST['search'])){
-   $search = mysqli_real_escape_string($link,$_POST['search']);
-
-   $query = "SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$search."%' limit 100";
-   $result = mysqli_query($link,$query);
-
-   $response = array();
-   while($row = mysqli_fetch_array($result) ){
-     $response[] = array("label"=>$row['name']);
-   }
-
-   echo json_encode($response);
+  // generate array with activity data
+  $activityData = array();
+  if($query->num_rows > 0) {
+    while($row = $query->fetch_assoc()){
+      $data['id'] = $row['metCode'];
+      $data['value'] = $row['skill'];
+      array_push($skillData, $data);
+    }
   }
 
-  exit;
+echo json_encode($skillData);
 ?>
