@@ -10,11 +10,11 @@
     echo "Successfully connected to database.";
   }
 
-  // get search term
+// get search term
   $searchTerm = $_GET['term'];
 
   // fetch matched data from the database
-  $query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 100");
+  $query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' AND limit 100");
 
 
   // generate array with activity data
@@ -22,11 +22,30 @@
   if($query->num_rows > 0) {
     while($row = $query->fetch_assoc()){
       //$data['id'] = $row['metCode'];
-      echo $row['metCode'];
       $data['value'] = $row['specificActivities'];
       array_push($activityData, $data);
     }
   }
 
 echo json_encode($activityData);
+/*
+// Get search term
+$searchTerm = $_GET['term'];
+
+// Fetch matched data from the database
+$query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' AND status = 1 ORDER BY skill ASC");
+
+// Generate array with skills data
+$skillData = array();
+if($query->num_rows > 0){
+    while($row = $query->fetch_assoc()){
+        $data['id'] = $row['id'];
+        $data['value'] = $row['skill'];
+        array_push($skillData, $data);
+    }
+}
+
+// Return results as json encoded array
+echo json_encode($skillData);
+*/
 ?>
