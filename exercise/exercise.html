@@ -38,13 +38,13 @@
             select: function (event, ui) {
                // Set selection
                $('#autocomplete').val(ui.item.label); // display the selected text
-               $('#selectuser_id').val(ui.item.value); // save selected id to input
+
                return false;
             },
 
             focus: function(event, ui){
                $( "#autocomplete" ).val( ui.item.label );
-               $( "#selectuser_id" ).val( ui.item.value );
+               
                return false;
              },
 
