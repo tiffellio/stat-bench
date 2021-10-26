@@ -23,9 +23,9 @@
     while($row = $query->fetch_assoc()){
       $data['id'] = $row['metCode'];
       $data['value'] = $row['skill'];
-      array_push($skillData, $data);
+      array_push($activityData, $data);
     }
   }
 
-echo json_encode($skillData);
+echo json_encode($activityData);
 ?>
