@@ -14,7 +14,7 @@
   $searchTerm = $_GET['term'];
 
   // fetch matched data from the database
-  $query = $db->query("SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 100")
+  $query = $db->query("SELECT specificActivities FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 100");
 
 
   // generate array with activity data
