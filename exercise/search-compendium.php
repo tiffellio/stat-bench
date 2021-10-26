@@ -11,7 +11,7 @@
   }
 
 // get search term
-  $searchTerm = $_GET['skill_input'];
+  $searchTerm = "b";
 
   // fetch matched data from the database
   $query = $db->query("SELECT * FROM activity WHERE specificActivities LIKE '%".$searchTerm."%' limit 5");
