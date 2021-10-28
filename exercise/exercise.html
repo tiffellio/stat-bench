@@ -15,19 +15,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <!-- initialize autocomplete -->
-    <script>
-    $(function() {
 
-        $('#skill_input').autocomplete({
-
-            source: 'search-compendium.php'
-
-        });
-
-    });
-
-    </script>
 
 </head>
 <body>
@@ -73,6 +61,20 @@
                 <button type="submit" value="submit"> + LOG! </button> <br>
 
             </form>
+
+            <!-- initialize autocomplete -->
+            <script>
+            $(function() {
+
+                $('#skill_input').autocomplete({
+
+                    source: 'search-compendium.php'
+
+                });
+
+            });
+
+            </script>
         </div>
     </div>
 
