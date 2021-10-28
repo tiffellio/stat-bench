@@ -106,3 +106,22 @@ body {
     border: 1px solid #204b44;
     color: #E8E6E1;
   }
+
+/* ----------- AUTO COMPLETE --------- */
+
+input[type=search] {
+    background: none;
+    font-weight: bold;
+    border-color: #2e2e2e;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    outline: none;
+    padding: 10px 20px 10px 20px;
+    width: 250px;
+}
+/*Css to target the dropdownbox*/
+ul.ui-autocomplete {
+    color: red !important;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}

@@ -6,7 +6,7 @@
 
   function get_activity($conn , $term){
 
-     $query = "SELECT * FROM activity WHERE specificActivities LIKE '%".$term."%' limit 5";
+     $query = "SELECT * FROM activity WHERE specificActivities LIKE '%".$term."%' limit 1000";
 
      $result = mysqli_query($conn, $query);
 
