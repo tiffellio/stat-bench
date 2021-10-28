@@ -111,9 +111,6 @@ body {
 /* ----------- AUTO COMPLETE ---------*/
 
 input[type=search] {
-    border-color: #2e2e2e;
-    border-style: solid;
-    border-width: 1px;
     outline: none;
     padding: 10px 20px 10px 20px;
     width: 250px;
@@ -121,7 +118,7 @@ input[type=search] {
 
 ul.ui-autocomplete {
     background-color: #413e39;
-    color: #b2b2ae !important;
+    color: #f48fb1 !important;
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
