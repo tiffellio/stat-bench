@@ -111,7 +111,7 @@ body {
 /* ----------- AUTO COMPLETE ---------*/
 
 input[type=search] {
-    background: none;
+    background: #25201d;
     font-weight: bold;
     border-color: #2e2e2e;
     border-style: solid;
@@ -122,7 +122,7 @@ input[type=search] {
 }
 
 ul.ui-autocomplete {
-    color: red !important;
-    -moz-border-radius: 15px;
+    color: #b2b2ae !important;
+    -moz-border-radius: 5px;
     border-radius: 15px;
 }
