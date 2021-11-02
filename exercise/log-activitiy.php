@@ -7,12 +7,4 @@ $qry = "SELECT * FROM activity";
 $res = mysqli_query($conn, $qry);
 
 
-$arr = mysqli_fetch_assoc($res);
-
-echo $arr['specificActivities'];    // name
-echo $arr['mets'];    // city
-
-
-
-
 ?>
