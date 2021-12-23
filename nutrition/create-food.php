@@ -25,16 +25,9 @@
     // Check if form boxes are empty or not first
     if(!empty($_POST['type']) &&
     !empty($_POST['quantity']) &&
-    !empty($_POST['measurement']) &&
-    !empty($_POST['calories']) &&
-    !empty($_POST['protein']) &&
-    !empty($_POST['fat']) &&
-    !empty($_POST['carbs'])){
+    !empty($_POST['measurement'])){
 
-      //INSERT INTO `stat_bench_3497853`.`food` 
-      //(`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) 
-      //VALUES (NULL, 'acorn squash', '1', '6', '172', '3', '0', '45');
-
+      // Store input
       $foodType = $_POST['type'] ;
       $quantity = $_POST['quantity'];
       $measurement = $_POST['measurement'];
@@ -77,41 +70,42 @@
         echo "Food already exists.<br><br>";
 
         // NOTE: MOVE TO OTHER SCRIPT Fetch the dictionary values for the food of that type and measurement
-            // something like:
-            $query = 'SELECT `quantity`, `calories`, `fat`, `protein`, `carbs` FROM `stat_bench_3497853`.`food` WHERE `foodType` = "Caramel Frappe" AND `measurement` = "5"';
+
+        // look up food dictionary value
+        $query = 'SELECT `quantity`, `calories`, `fat`, `protein`, `carbs` FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `measurement` = "'.$measurement.'"';
 
         $run = mysqli_query($link, $query) or die(mysqli_error($link));
 
-        // store into variables
+        // store dictionary food values in an associative array
+        // Output example: Array ( [0] => Array ( [quantity] => 1 [calories] => 200 [fat] => 1 [protein] => 4 [carbs] => 45 ) )
         while( $row = mysqli_fetch_assoc($run) ){
 
             $new_array[] = $row;
 
         }
 
-        print_r($new_array);
+        //print_r($new_array);
+        //echo "<br>";
 
         $dictionaryQuantity = $new_array[0]["quantity"];
-
         $dictionaryCals = $new_array[0]["calories"];
-
         $dictionaryProtein = $new_array[0]["protein"];
-
         $dictionaryFat = $new_array[0]["fat"];
-
         $dictionaryCarbs = $new_array[0]["carbs"];
-
-        //echo "Dictionary Values, Calories:".$dictionaryCals." <br> Protein: ".$dictionaryProtein." <br> Fat: ".$dictionaryFat." <br> Carbs: ".$dictionaryCarbs." <br>";
 
 
         // call adjustcalories() with new VALUES
-        adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity);
-        // call adjustMacros() with new Values
+        $adjustedCals = adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity);
 
+        //echo "Adjusted calories are: ".$adjustedCals." <br> ";
+
+
+        // call adjustMacros() with new Values
+        adjustMacros($dictionaryProtein, $dictionaryCals, $adjustedCals);
+        adjustMacros($dictionaryFat, $dictionaryCals, $adjustedCals);
+        adjustMacros($dictionaryCarbs, $dictionaryCals, $adjustedCals);
 
       }
-
-
 
     } else {
       echo "ALL fields are required <br>";
@@ -129,7 +123,7 @@ function adjustCalories($dictionaryQuantity, $dictionaryCals, $newQuantity){
 
     $adjustedCals = $calPerUnit * $newQuantity;
 
-    echo "New cals are ".$newQuantity;
+    return $adjustedCals;
   // return adjustedCals
 
 }
@@ -137,8 +131,8 @@ function adjustCalories($dictionaryQuantity, $dictionaryCals, $newQuantity){
 
 
 
-  adjustMacros(1, 600, 1200);
-
+  
+  // ** change newCals to the returned value of adjusted calories
   function adjustMacros($macro, $dictionaryCals, $newCals) {
 
     $perCal = 0;
@@ -156,3 +150,4 @@ function adjustCalories($dictionaryQuantity, $dictionaryCals, $newQuantity){
   }
 
 ?>
+<?php header("Location: nutrition.html"); ?>
