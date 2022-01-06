@@ -75,32 +75,33 @@
             </div> <!-- end sub-item-1 -->
 
             <div id="sub-item-2">
-                <form>
+                <form action="log-existing-food.php" method="POST">
 
                     <!-- search a food item -->
-                    <input type="text" id="food-type-srch" placeholder="Ex: Peach, Steamed Rice, Chicken Thigh" /> <br>
+                    <input type="text" id="food-type-srch" name="food-type-srch" placeholder="Ex: Peach, Steamed Rice, Chicken Thigh" /> <br>
                     <label> Type </label> <br>
 
                     <!-- display results -->
 
                     <!-- select how many -->
-                    <input type="number" id="food-quantity-srch">
+                    <input type="number" id="food-quantity-srch" name="food-quantity-srch">
 
-                    <select name="unit-srch">
-                        <option value="cups"> cups </option>
-                        <option value="mls"> mls </option>
-                        <option value="tablespoons"> tablespoon(s) </option>
-                        <option value="teaspoons"> teaspoon(s) </option>
-                        <option value="grams"> gram(s) </option>
-                        <option value="oz"> ounce(s) </option>
-                        <option value="serving"> serving </option>
+                    <select id="unit-srch" name="unit-srch">
+                      <option value="0"> Select a unit </option>
+                      <option value="1"> cups </option>
+                      <option value="2"> mls </option>
+                      <option value="3"> tablespoon(s) </option>
+                      <option value="4"> teaspoon(s) </option>
+                      <option value="5"> gram(s) </option>
+                      <option value="6"> ounce(s) </option>
+                      <option value="7"> serving </option >
                     </select> <br>
 
                     <label> Quantity </label> <br>
 
                     <!-- display nutrition stats -->
 
-                    <button> + ADD! </button>
+                    <button type="submit" name="submit"> + ADD! </button>
 
                 </form>
             </div> <!-- end sub-item-1 -->
