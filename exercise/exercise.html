@@ -32,7 +32,7 @@
             <span id="stat">STAT</span>
             <span id="bench">BENCH</span>
             </div>
-            <div class="sidebar-item"><a href="../index.html">Dashboard</a></div>
+            <div class="sidebar-item"><a href="../index.php">Dashboard</a></div>
             <div class="sidebar-item"><a href="../nutrition/nutrition.html">Nutrition</a></div>
             <div class="sidebar-item" id="homepage"><a href="exercise.html">Exercise</a></div>
             <div class="sidebar-item"><a href="../sleep/sleep.html">Sleep</a></div>
@@ -41,24 +41,24 @@
         </div>
 
         <div class="item" id="exercise-form">
-            <form>
+            <form action="log-activity.php" method="POST">
 
-                <input type="text" id="skill_input"/>  <br>
+                <input type="text" id="skill_input" name="type"/>  <br>
                 <label for="tags"> Type </label> <br> <!-- Search -->
 
 
-                <select name="intensity">
+                <!--<select name="intensity">
                     <option value="low"> Low </option>
                     <option value="moderate"> Moderate </option>
                     <option value="high"> High </option>
                 </select> <br>
-                <label> Intensity </label> <br>
+                <label> Intensity </label> <br> -->
 
-                <input type="text" /> <br>
+                <input type="number" name="duration" /> <br>
                 <label> Duration </label> <br> 
 
 
-                <button type="submit" value="submit"> + LOG! </button> <br>
+                <button type="submit" name="submit"> + LOG! </button> <br>
 
             </form>
 

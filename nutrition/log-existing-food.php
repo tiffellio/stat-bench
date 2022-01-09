@@ -22,53 +22,28 @@
     && !empty($_POST['unit-srch'])){
 
       // Store input
-      $foodType = $_POST['type'] ;
-      $quantity = $_POST['quantity'];
-      $measurement = $_POST['measurement'];
-      $calories = $_POST['calories'];
-      $protein = $_POST['protein'];
-      $fat = $_POST['fat'];
-      $carbs = $_POST['carbs'];
+      $foodType = $_POST['food-type-srch'] ;
+      $quantity = $_POST['food-quantity-srch'];
+      $measurement = $_POST['unit-srch'];
+      
 
-      // Check if the food already exists in the dictionary. If it does, run a submit to food log, if it doesn't create first and then food log it.
-
-
-      //echo "All fields completed <br>";
+      // Check if the food already exists in the dictionary. If it doesn't, they need to use the create-food.php form, if it does then log it in the foodLog table
 
       // Search for the food by the food type AND measurement type. If a different unit of measurement is used, create a new food table entry
       $query = 'SELECT * FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `measurement` = "'.$measurement.'"';
 
       $run = mysqli_query($link, $query) or die(mysqli_error($link));
 
-      /*while ($row = mysqli_fetch_array($run)){
+      
+      if (mysqli_num_rows($run) == 0) { //check for results
 
-        print_r($row);
+        echo "This food doesn't exist yet, please create it";
 
-      }*/
+      } else { // food doesn't exist yet
 
-      if (mysqli_num_rows($run) == 0) {
+        echo "Food exists.<br><br>";
 
-        $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
-
-        $run = mysqli_query($link, $query) or die(mysqli_error($link)); //NOTE: you have to give mysql_error the connection object
-
-        if($run){
-
-          echo "New food entry added to Food table<br><br>";
-
-        } else {
-
-          echo "Failed to add food to Food table<br><br>";
-
-        }
-
-      } else {
-
-        echo "Food already exists.<br><br>";
-
-        // NOTE: MOVE TO OTHER SCRIPT Fetch the dictionary values for the food of that type and measurement
-
-        // look up food dictionary value
+        // Look up food dictionary value so we can use it to calculate the updated amount
         $query = 'SELECT `quantity`, `calories`, `fat`, `protein`, `carbs` FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `measurement` = "'.$measurement.'"';
 
         $run = mysqli_query($link, $query) or die(mysqli_error($link));
@@ -81,8 +56,8 @@
 
         }
 
-        //print_r($new_array);
-        //echo "<br>";
+        print_r($new_array);
+        echo "  are the dictionary amounts for this food. <br><br>";
 
         $dictionaryQuantity = $new_array[0]["quantity"];
         $dictionaryCals = $new_array[0]["calories"];
@@ -90,17 +65,33 @@
         $dictionaryFat = $new_array[0]["fat"];
         $dictionaryCarbs = $new_array[0]["carbs"];
 
+        // If the quantity is different, we need to adjust the nutrition values
+        if($dictionaryQuantity != $quantity) {
 
-        // call adjustcalories() with new VALUES
-        $adjustedCals = adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity);
+          // call adjustcalories() with new VALUES
+          $adjustedCals = adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity);
 
-        //echo "Adjusted calories are: ".$adjustedCals." <br> ";
+          // call adjustMacros() with new Values
+          $adjustedProtein = adjustMacros($dictionaryProtein, $dictionaryCals, $adjustedCals);
+          $adjustedFat = adjustMacros($dictionaryFat, $dictionaryCals, $adjustedCals);
+          $adjustedCarbs = adjustMacros($dictionaryCarbs, $dictionaryCals, $adjustedCals);
+
+        } else { // use dictionary amount
+           echo "<br>Quantity is equal to the dicitonary amount. <br>";
+        }
 
 
-        // call adjustMacros() with new Values
-        adjustMacros($dictionaryProtein, $dictionaryCals, $adjustedCals);
-        adjustMacros($dictionaryFat, $dictionaryCals, $adjustedCals);
-        adjustMacros($dictionaryCarbs, $dictionaryCals, $adjustedCals);
+
+
+
+        /******** NEXT STEP: FIND HOW TO PASS VALUES BACK TO nutrition.html TO DISPLAY ON PAGE********* */\
+          // SHOULD DISPLAY VALUES THEN MAKE A BUTTON APPEAR TO LOG (ENTER IN FOODLOG)
+          // AND ADD MESSAGE TO CREATE A NEW FOOD IF WANTED
+
+
+
+
+          
 
       }
 
@@ -112,18 +103,22 @@
 
   }
 
-  function adjustCalories($dictionaryQuantity, $dictionaryCals, $newQuantity){
+  function adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity){
 
       // ** Check user input is a positive number
 
-      $adjustedCals = 0;
+       echo '<br><br>newQuantity: '.$quantity;
+      // $newCals = 0;
 
-      $calPerUnit = $dictionaryCals / $dictionaryQuantity;
+      $calPerUnit = intdiv($dictionaryCals, $dictionaryQuantity);
 
-      $adjustedCals = $calPerUnit * $newQuantity;
+      echo '<br><br>calPerUnit: '.$calPerUnit;
 
-      return $adjustedCals;
-    // return adjustedCals
+      $newCals = ($calPerUnit * $quantity);
+
+      echo '<br><br>Newcals: '.$newCals;
+
+      return $newCals;
 
   }
 
@@ -144,7 +139,7 @@
 
       echo "There are ".$adjustedMacro." gs of this macro in ".$newCals." calories of the measurement <br><br>";
 
-      // return quantity
+      return $adjustedMacro;
 
     }
 
