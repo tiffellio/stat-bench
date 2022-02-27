@@ -49,8 +49,8 @@
   <meta charset="UTF-8">
   <title>STATBENCH</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="home/css/gridsheet.css">
-  <link rel="stylesheet" href="home/css/stylesheet.css">
+  <link rel="stylesheet" href="home/css/dark/gridsheet.css">
+  <link rel="stylesheet" href="home/css/dark/stylesheet.css">
   <link href='https://fonts.googleapis.com/css?family=Pontano Sans' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
