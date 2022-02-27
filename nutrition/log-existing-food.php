@@ -24,11 +24,8 @@
       // Store input
       $foodType = $_POST['type'] ;
       $quantity = $_POST['quantity'];
-      $measurement = $_POST['measurement'];
-      $calories = $_POST['calories'];
-      $protein = $_POST['protein'];
-      $fat = $_POST['fat'];
-      $carbs = $_POST['carbs'];
+      $measurement = $_POST['unit-srch'];
+
 
       // Check if the food already exists in the dictionary. If it does, run a submit to food log, if it doesn't create first and then food log it.
 
@@ -40,15 +37,14 @@
 
       $run = mysqli_query($link, $query) or die(mysqli_error($link));
 
-      /*while ($row = mysqli_fetch_array($run)){
 
-        print_r($row);
 
-      }*/
 
       if (mysqli_num_rows($run) == 0) {
 
-        $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
+        /*
+
+        $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$foodType', '$quantity', '$unit-srch', '$calories', '$protein', '$fat', '$carbs')";
 
         $run = mysqli_query($link, $query) or die(mysqli_error($link)); //NOTE: you have to give mysql_error the connection object
 
@@ -60,7 +56,7 @@
 
           echo "Failed to add food to Food table<br><br>";
 
-        }
+        }*/
 
       } else {
 
