@@ -22,7 +22,7 @@
             <span id="stat">STAT</span>
             <span id="bench">BENCH</span>
             </div>
-            <div class="sidebar-item"><a href="../index.html">Dashboard</a></div>
+            <div class="sidebar-item"><a href="../index.php">Dashboard</a></div>
             <div class="sidebar-item"><a href="../nutrition/nutrition.html">Nutrition</a></div>
             <div class="sidebar-item"><a href="../exercise/exercise.html">Exercise</a></div>
             <div class="sidebar-item" id="homepage"><a href="sleep.html">Sleep</a></div>
@@ -34,32 +34,34 @@
 
         <div class="item" id="sleep-form">
 
-            <form>
+            <form action="log-sleep.php" method="POST">
                 <!-- NOTE: convert all sleep times to minutes after-->
+                <!--
                 <div id="interval">
                     <input type="time" /> <br>
                     <label> Bed Time: </label> <br>
 
                     <input type="time" /> <br>
                     <label> Wake up Time: </label> <br>
+                </div>-->
+
+
+                <div id="length">
+                    <input type="number" placeholder="hours" name="hours">
+                    <input type="number" placeholder="minutes" name="minutes"><br>
+                    <label> How long did you sleep last night? </label> <br>
                 </div>
 
 
-                <!-- <div id="length">
-                    <input type="number" placeholder="hours">
-                    <input type="number" placeholder="minutes"><br>
-                    <label> How long did you sleep last night? </label> <br>
-                </div> -->
-
-
                 <select name="sleep-quality">
-                    <option value="poor"> Poorly. </option>
-                    <option value="good"> Good. </option>
-                    <option value="great"> Great! </option>
+                    <option value="0"> Select an Option </option>
+                    <option value="1"> Poorly. </option>
+                    <option value="2"> Good. </option>
+                    <option value="3"> Great! </option>
                 </select><br>
                 <label> How did you sleep? </label><br>
 
-                <button> + LOG! </button><br>
+                <button type="submit" name="submit"> + LOG! </button><br>
 
             </form>
 

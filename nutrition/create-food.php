@@ -5,6 +5,10 @@
 // Date: October 2021
 // Author: Tiffany Elliott
 
+/**********TEMP VALS, REMEMBER TO UPDATE ************** */
+$ACTID = 9; // temporary global until account login is created
+$DATEID = 6; //will need to create date function when user logs in to call dateLog
+
   require_once("../private/dbinfo.inc.php");
 
   $link = mysqli_connect($host, $username, $password, $db_name);
@@ -25,7 +29,12 @@
     // Check if form boxes are empty or not first
     if(!empty($_POST['type']) &&
     !empty($_POST['quantity']) &&
-    !empty($_POST['measurement'])){
+    !empty($_POST['measurement'])&&
+    !empty($_POST['calories'])&&
+    !empty($_POST['protein'])&&
+    !empty($_POST['fat'])&&
+    !empty($_POST['carbs'])
+    ){
 
       // Store input
       $foodType = $_POST['type'] ;
@@ -43,21 +52,45 @@
 
       $run = mysqli_query($link, $query) or die(mysqli_error($link));
 
-      /*while ($row = mysqli_fetch_array($run)){
 
-        print_r($row);
-
-      }*/
-
+      // No results found, add to food dictionary
       if (mysqli_num_rows($run) == 0) {
 
-        $query = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
+        // add to food dictionary (query2)
+        $query2 = "INSERT INTO `stat_bench_3497853`.`food` (`foodID`, `foodType`, `quantity`, `measurement`, `calories`, `protein`, `fat`, `carbs`) VALUES (NULL, '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
 
-        $run = mysqli_query($link, $query) or die(mysqli_error($link)); //NOTE: you have to give mysql_error the connection object
+        $run2 = mysqli_query($link, $query2) or die(mysqli_error($link)); 
+               
+        // find the food you just entered to grab the foodID (we'll need this for inserting into the foodLog table)
+        $idQuery = 'SELECT foodID FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `quantity` = "'.$quantity.'" AND `measurement` = "'.$measurement.'" AND `calories` = "'.$calories.'" AND `protein` = "'.$protein.'" AND `fat` = "'.$fat.'" AND `carbs` = "'.$carbs.'"';
+          
+        $idRun = mysqli_query($link, $idQuery) or die(mysqli_error($link)); 
 
-        if($run){
+        while( $row = mysqli_fetch_assoc($idRun) ){
+          $new_array[] = $row;
+        }
 
-          echo "New food entry added to Food table<br><br>";
+        $foodID = $new_array[0]["foodID"];
+
+        echo $foodID;
+
+        if($run2){
+
+          //echo "New food entry added to Food table<br><br>";
+
+          // Log food
+          $logQuery = "INSERT INTO `stat_bench_3497853`.`foodLog` (`food_logID`, `actID`, `dateID`, `foodID`, `foodTypeEntry`, `quantityEntry`, `measurementEntry`, `caloriesEntry`, `proteinEntry`, `fatEntry`, `carbsEntry`) VALUES (NULL, '$ACTID', '$DATEID', '$foodID',  '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
+
+          $logRun = mysqli_query($link, $logQuery) or die(mysqli_error($link));
+
+          //echo "New food entry added to Food LOG table<br><br>";
+
+
+          
+          // ****** NEXT: DISPLAY WITH AJAX "NEW FOOD ITEM CREATED AND LOGGED TO YOUR FOOD LOG 
+
+
+
 
         } else {
 
@@ -65,89 +98,51 @@
 
         }
 
-      } else {
+      }  else {
 
-        echo "Food already exists.<br><br>";
+        //echo "Food already exists. Logging.<br><br>";
 
-        // NOTE: MOVE TO OTHER SCRIPT Fetch the dictionary values for the food of that type and measurement
+        // find the food you just entered to grab the foodID (we'll need this for inserting into the foodLog table)
+        $idQuery = 'SELECT foodID FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `quantity` = "'.$quantity.'" AND `measurement` = "'.$measurement.'" AND `calories` = "'.$calories.'" AND `protein` = "'.$protein.'" AND `fat` = "'.$fat.'" AND `carbs` = "'.$carbs.'"';
+          
+        $idRun = mysqli_query($link, $idQuery) or die(mysqli_error($link)); 
 
-        // look up food dictionary value
-        $query = 'SELECT `quantity`, `calories`, `fat`, `protein`, `carbs` FROM `stat_bench_3497853`.`food` WHERE `foodType` = "'.$foodType.'" AND `measurement` = "'.$measurement.'"';
-
-        $run = mysqli_query($link, $query) or die(mysqli_error($link));
-
-        // store dictionary food values in an associative array
-        // Output example: Array ( [0] => Array ( [quantity] => 1 [calories] => 200 [fat] => 1 [protein] => 4 [carbs] => 45 ) )
-        while( $row = mysqli_fetch_assoc($run) ){
-
-            $new_array[] = $row;
-
+        while( $row = mysqli_fetch_assoc($idRun) ){
+          $new_array[] = $row;
         }
 
-        //print_r($new_array);
-        //echo "<br>";
+        $foodID = $new_array[0]["foodID"];
 
-        $dictionaryQuantity = $new_array[0]["quantity"];
-        $dictionaryCals = $new_array[0]["calories"];
-        $dictionaryProtein = $new_array[0]["protein"];
-        $dictionaryFat = $new_array[0]["fat"];
-        $dictionaryCarbs = $new_array[0]["carbs"];
+        //echo $foodID;
 
+        // Log food
+        $logQuery = "INSERT INTO `stat_bench_3497853`.`foodLog` (`food_logID`, `actID`, `dateID`, `foodID`, `foodTypeEntry`, `quantityEntry`, `measurementEntry`, `caloriesEntry`, `proteinEntry`, `fatEntry`, `carbsEntry`) VALUES (NULL, '$ACTID', '$DATEID', '$foodID',  '$foodType', '$quantity', '$measurement', '$calories', '$protein', '$fat', '$carbs')";
 
-        // call adjustcalories() with new VALUES
-        $adjustedCals = adjustCalories($dictionaryQuantity, $dictionaryCals, $quantity);
+        $logRun = mysqli_query($link, $logQuery) or die(mysqli_error($link));
 
-        //echo "Adjusted calories are: ".$adjustedCals." <br> ";
+        //echo "Existing food entry added to Food Log table<br><br>";
 
 
-        // call adjustMacros() with new Values
-        adjustMacros($dictionaryProtein, $dictionaryCals, $adjustedCals);
-        adjustMacros($dictionaryFat, $dictionaryCals, $adjustedCals);
-        adjustMacros($dictionaryCarbs, $dictionaryCals, $adjustedCals);
+
+        // ****** NEXT: DISPLAY WITH AJAX " FOOD DISCOVERED IN DB, ADDING TO YOUR FOOD LOG"
+
+
+
+
 
       }
+      
+
+      header("Location: nutrition.html");
 
     } else {
+
       echo "ALL fields are required <br>";
+
     }
-
-  }
-
-function adjustCalories($dictionaryQuantity, $dictionaryCals, $newQuantity){
-
-    // ** Check user input is a positive number
-
-    $adjustedCals = 0;
-
-    $calPerUnit = $dictionaryCals / $dictionaryQuantity;
-
-    $adjustedCals = $calPerUnit * $newQuantity;
-
-    return $adjustedCals;
-  // return adjustedCals
-
-}
-
-
-
-
-  
-  // ** change newCals to the returned value of adjusted calories
-  function adjustMacros($macro, $dictionaryCals, $newCals) {
-
-    $perCal = 0;
-
-    $adjustedMacro = 0;
-
-    $perCal = $macro / $dictionaryCals;
-
-    $adjustedMacro = $perCal * $newCals;
-
-    echo "There are ".$adjustedMacro." gs of this macro in ".$newCals." calories of the measurement <br><br>";
-
-    // return quantity
-
+    
   }
 
 ?>
-<?php header("Location: nutrition.html"); ?>
+
+
