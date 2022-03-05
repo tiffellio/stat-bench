@@ -1,40 +1,17 @@
 <?php
-  require_once("./private/dbinfo.inc.php");
 
+  require_once("./private/dbinfo.inc.php");
+  require_once("./private/dashboard/fetch-stats.php");
+
+  // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);
 
-  // check if connection is successfull
-
-
+  // Check if connection is successful
   if (mysqli_connect_error()){
 
     die("There was a problem connecting to the MySQL database: ".mysqli_connect_error());
 
-  } else {
-    echo 'connection to new database was sucessfull\n';
-  }
-
-/*
-  $date = "SELECT `dateID` FROM `dateLog` WHERE date(`date`) = CURDATE()";
-
-    if ($result = mysqli_query($link, $date)) {
-
-        $row = mysqli_fetch_array($result);
-
-        echo $row;
-
-    } */
-
-    $query = "SELECT * FROM dateLog";
-
-    if ($result = mysqli_query($link, $query)) {
-
-        $row = mysqli_fetch_array($result);
-
-        echo "Your result is ".$row;
-
-    }
-
+  } 
 
 ?>
 <!DOCTYPE html>
@@ -128,12 +105,21 @@
         macros & calories -->
         <div class="label" id="foodlabel"> Food Log </div>
         <div class="item" id="foodlog">
-          <div id ="fooditem">
-              <span id="foodquantity"> 1 </span>
-              <span id="foodsize"> Large </span>
-              <span id="foodtype"> Apricot </span>
-              <span id="foodcalories"> 40 Cals </span>
-          </div>
+          
+          <?php 
+
+          $j = 1;
+
+          while ($j < $entries){
+
+            echo '<div id ="fooditem"><span>'.$foodType[$j].'&nbsp'.$quantity[$j].'&nbsp'.$measurement[$j].'&nbsp'.$foodCals[$j].'&nbsp'.$protein[$j].'g protein &nbsp'.$fat[$j].'g fat &nbsp'.$carbs[$j].'g carbs </span></div><br>';
+
+            $j++;
+
+          }
+
+          ?>
+          
         </div>
 
         <!-- ********** EXERCISE LOG ********** -->

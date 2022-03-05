@@ -7,7 +7,7 @@
 
 /**********TEMP VALS, REMEMBER TO UPDATE ************** */
 $ACTID = 9; // temporary global until account login is created
-$DATEID = 6; //will need to create date function when user logs in to call dateLog
+$DATEID = 8; //will need to create date function when user logs in to call dateLog
 
   require_once("../private/dbinfo.inc.php");
 
