@@ -25,7 +25,7 @@
       $foodType = $_POST['food-type-srch'] ;
       $quantity = $_POST['food-quantity-srch'];
       $measurement = $_POST['unit-srch'];
-      
+
 
       // Check if the food already exists in the dictionary. If it doesn't, they need to use the create-food.php form, if it does then log it in the foodLog table
 
@@ -34,7 +34,7 @@
 
       $run = mysqli_query($link, $query) or die(mysqli_error($link));
 
-      
+
       if (mysqli_num_rows($run) == 0) { //check for results
 
         echo "This food doesn't exist yet, please create it";
@@ -91,7 +91,7 @@
 
 
 
-          
+
 
       }
 
