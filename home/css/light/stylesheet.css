@@ -11,7 +11,7 @@ body {
 
 /* -------- Top bar labels --------- */
 #calories-label, #activity-label, #water-label {
-  color: #03d9c4; /* green */
+  color: #6200ee; /* green */
 }
 
 /* -------- SIDEBAR CONTAINER -------- */
@@ -22,20 +22,20 @@ body {
   padding: 10px;
 }
 
-#stat{ color: #f48fb1; border-bottom: 1px solid #03d9c4; }
-#bench{ color: #03d9c4; border-bottom: 1px solid #f48fb1; }
+#stat{ color: #6200ee; border-bottom: 1px solid #38283d; }
+#bench{ color: #38283d; border-bottom: 1px solid #6200ee; }
 
 /* default sidebar styling */
 .sidebar-item a{
   text-decoration: none;
-  color: #b2b2ae;
+  color: #38283d;
   font-size: large;
   padding:15px;
 }
 
 /* sidebar item when hovered */
 .sidebar-item a:hover{
-  color: #ffffff;
+  color: #6200ee;
 }
 
 /* text color of selected sidebar item */
@@ -147,7 +147,7 @@ inline-block for placing items beside */
 
 /* -------- GREETING CONTAINER -------- */
 #greeting #date {
-  color: #f48fb1; /* pink */
+  color: #6200ee; /* pink */
   padding: 10px;
 }
 
@@ -161,7 +161,7 @@ inline-block for placing items beside */
 }
 
 #fooditem {
-  color: #E8E6E1;
+  color: #38283d;
   border-bottom: 1px solid #b2b2ae;
   padding: 10px 5px;
 }
@@ -169,7 +169,7 @@ inline-block for placing items beside */
 /* -------- SLEEP CONTAINER --------*/
 
 #sleep-label {
-  color: #03d9c4;
+  color: #6200ee;
 }
 
 #sleep-num {
@@ -184,5 +184,5 @@ inline-block for placing items beside */
 /* -------- MACRO CONTAINER --------*/
 
 #macro-label {
-  color: #03d9c4;
+  color: #6200ee;
 }
