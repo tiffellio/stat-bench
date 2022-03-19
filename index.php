@@ -2,7 +2,7 @@
 
   require_once("./private/dbinfo.inc.php");
   require_once("./private/dashboard/fetch-stats.php");
-
+  require("./private/profileData/setDate.php");
   // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);
 

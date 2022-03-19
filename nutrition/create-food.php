@@ -23,14 +23,14 @@ $DATEID = 8; //will need to create date function when user logs in to call dateL
   } else {
     echo "Connection to new database was sucessful <br><br>";
   }
-
+ 
   if (isset($_POST['submit'])){
 
     // Check if form boxes are empty or not first
     if(!empty($_POST['type']) &&
     !empty($_POST['quantity']) &&
     !empty($_POST['measurement'])&&
-    !empty($_POST['calories'])&&
+    !empty($_POST['calories'])&&6
     !empty($_POST['protein'])&&
     !empty($_POST['fat'])&&
     !empty($_POST['carbs'])
