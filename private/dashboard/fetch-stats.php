@@ -1,5 +1,8 @@
 <?php
-    // Connect to database
+    require_once("/misc/14/000/350/750/0/user/web/statbench.ca/private/dbinfo.inc.php");
+    require_once("/misc/14/000/350/750/0/user/web/statbench.ca/private/profileData/setDate.php"); // Checks if a date entry has been added to the database yet and creates one if not (my DB doesn't support crons so it's the best workaround I can think of...)
+
+    //Connect to database
     $link = mysqli_connect($host, $username, $password, $db_name);
 
     // Check if connection is successful
@@ -11,64 +14,75 @@
 
     /**********TEMP VALS, REMEMBER TO UPDATE ************** */
     $ACTID = 9; // temporary global until account login is created
-    $DATEID = 8; //will need to create date function when user logs in to call dateLog
-
+    $DATEID = $dateID;
+    echo "DATEID is".$dateID;
     // Fetch all food entered in the foodLog for todays date for our user
     $query = 'SELECT * FROM `stat_bench_3497853`.`foodLog` WHERE `actID` = "'.$ACTID.'" AND `dateID` = "'.$DATEID.'"';
     
     $run = mysqli_query($link, $query) or die(mysqli_error($link)); 
 
-    while( $row = mysqli_fetch_assoc($run) ){
+    if (mysqli_num_rows($run) == 0) { 
 
-        $new_array[] = $row;
+        $entries = 0;
+        
+        echo "No entries found. Log your food!";
 
-    }
+    } else {
 
-    // Store fetched food log data to display on dashboard
-    $foodType[] = "";
-    $quantity[] = 0;
-    $measurementNum[] = 0;
-    $foodCals[] = 0;
-    $protein[] = 0;
-    $fat[] = 0;
-    $carbs[] = 0;
+        while( $row = mysqli_fetch_assoc($run) ){
 
-    $i = 0; 
+            $new_array[] = $row;
 
-    while ($i <= mysqli_num_rows($run)){
+        }
 
-        $foodType[] = $new_array[$i]["foodTypeEntry"];
+        // Store fetched food log data to display on dashboard
+        $foodType[] = "";
+        $quantity[] = 0;
+        $measurementNum[] = 0;
+        $foodCals[] = 0;
+        $protein[] = 0;
+        $fat[] = 0;
+        $carbs[] = 0;
 
-        $quantity[] = $new_array[$i]["quantityEntry"];
+        $i = 0; 
 
-        $measurementNum[] = $new_array[$i]["measurementEntry"];
+        while ($i <= mysqli_num_rows($run)){
 
-        $foodCals[] = $new_array[$i]["caloriesEntry"];
+            $foodType[] = $new_array[$i]["foodTypeEntry"];
 
-        $protein[] = $new_array[$i]["proteinEntry"];
+            $quantity[] = $new_array[$i]["quantityEntry"];
 
-        $fat[] = $new_array[$i]["fatEntry"];
+            $measurementNum[] = $new_array[$i]["measurementEntry"];
 
-        $carbs[] = $new_array[$i]["carbsEntry"];
+            $foodCals[] = $new_array[$i]["caloriesEntry"];
 
-        $i++;
+            $protein[] = $new_array[$i]["proteinEntry"];
 
-    }
+            $fat[] = $new_array[$i]["fatEntry"];
 
-    $entries = $i; // keep track of result count
+            $carbs[] = $new_array[$i]["carbsEntry"];
+
+            $i++;
+
+        }
+
+        $entries = $i; // keep track of result count
 
 
-    // Convert measurement number to actual type to display
-    $measurement[] = "";
-    $pos = 0;
+        // Convert measurement number to actual type to display
+        $measurement[] = "";
+        $pos = 0;
 
-    while ($pos < $entries){
+        while ($pos < $entries){
 
-        $measurement[$pos] = convertMeasurement($measurementNum[$pos]);
+            $measurement[$pos] = convertMeasurement($measurementNum[$pos]);
 
-        $pos++;
+            $pos++;
 
-    }
+        }
+
+    } 
+
 
     // Measurement values
     // Cups = 1 , Mls = 2, Tbsp = 3, Tsp = 4, Grams = 5, Ounces = 6, Serving = 7

@@ -1,8 +1,15 @@
 <?php
+/*
+Project: STATBENCH
+File: Homepage
+Author: Tiffany Elliott (email info@elliottt.space)
+Date: July 2021 - 2022
+*/
 
-  require_once("./private/dbinfo.inc.php");
-  require_once("./private/dashboard/fetch-stats.php");
-  require("./private/profileData/setDate.php");
+  require_once("./private/dbinfo.inc.php"); // Grab db info
+  require_once("./private/profileData/setDate.php"); // Checks if a date entry has been added to the database yet and creates one if not (my DB doesn't support crons so it's the best workaround I can think of...)
+  require_once("./private/dashboard/fetch-stats.php");  // Grab the stats for the dashboard
+
   // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);
 
@@ -15,12 +22,6 @@
 
 ?>
 <!DOCTYPE html>
-<!--  Project: STATBENCH
-      File: Homepage
-      Author: Tiffany Elliott (email info@elliottt.space)
-      Date: July 2021
--->
-
 <html lang="en">
 
   <meta charset="UTF-8">
@@ -108,13 +109,21 @@
           
           <?php 
 
-          $j = 1;
+          if($entries == 0){
 
-          while ($j < $entries){
+            echo "Start logging your food!";
 
-            echo '<div id ="fooditem"><span>'.$foodType[$j].'&nbsp'.$quantity[$j].'&nbsp'.$measurement[$j].'&nbsp'.$foodCals[$j].'&nbsp'.$protein[$j].'g protein &nbsp'.$fat[$j].'g fat &nbsp'.$carbs[$j].'g carbs </span></div><br>';
+          } else {
 
-            $j++;
+            $j = 1;
+
+            while ($j < $entries){
+
+              echo '<div id ="fooditem"><span>'.$foodType[$j].'&nbsp'.$quantity[$j].'&nbsp'.$measurement[$j].'&nbsp'.$foodCals[$j].'&nbsp'.$protein[$j].'g protein &nbsp'.$fat[$j].'g fat &nbsp'.$carbs[$j].'g carbs </span></div><br>';
+
+              $j++;
+
+            }
 
           }
 

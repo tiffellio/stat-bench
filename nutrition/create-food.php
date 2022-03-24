@@ -4,10 +4,10 @@
 //  OR if it already exists, insert the food item into the FoodLog with the macros that were manually entered by user instead of calculating
 // Date: October 2021
 // Author: Tiffany Elliott
-
+require_once("/misc/14/000/350/750/0/user/web/statbench.ca/private/profileData/setDate.php"); 
 /**********TEMP VALS, REMEMBER TO UPDATE ************** */
 $ACTID = 9; // temporary global until account login is created
-$DATEID = 8; //will need to create date function when user logs in to call dateLog
+$DATEID = $dateID; //will need to create date function when user logs in to call dateLog
 
   require_once("../private/dbinfo.inc.php");
 
@@ -30,7 +30,7 @@ $DATEID = 8; //will need to create date function when user logs in to call dateL
     if(!empty($_POST['type']) &&
     !empty($_POST['quantity']) &&
     !empty($_POST['measurement'])&&
-    !empty($_POST['calories'])&&6
+    !empty($_POST['calories'])&&
     !empty($_POST['protein'])&&
     !empty($_POST['fat'])&&
     !empty($_POST['carbs'])
