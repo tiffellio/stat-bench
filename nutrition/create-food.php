@@ -4,6 +4,7 @@
 //  OR if it already exists, insert the food item into the FoodLog with the macros that were manually entered by user instead of calculating
 // Date: October 2021
 // Author: Tiffany Elliott
+
 require_once("/misc/14/000/350/750/0/user/web/statbench.ca/private/profileData/setDate.php"); 
 /**********TEMP VALS, REMEMBER TO UPDATE ************** */
 $ACTID = 9; // temporary global until account login is created
