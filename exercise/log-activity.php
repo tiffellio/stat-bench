@@ -1,9 +1,11 @@
 
 <?php
 
+require_once("/misc/14/000/350/750/0/user/web/statbench.ca/private/profileData/setDate.php"); 
+
 /**********TEMP VALS, REMEMBER TO UPDATE ************** */
 $ACTID = 9; // temporary global until account login is created
-$DATEID = 6; //will need to create date function when user logs in to call dateLog
+$DATEID = $dateID; 
 
 require_once("../private/dbinfo.inc.php");
 

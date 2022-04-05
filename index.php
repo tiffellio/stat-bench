@@ -8,7 +8,7 @@ Date: July 2021 - 2022
 
   require_once("./private/dbinfo.inc.php"); // Grab db info
   require_once("./private/profileData/setDate.php"); // Checks if a date entry has been added to the database yet and creates one if not (my DB doesn't support crons so it's the best workaround I can think of...)
-  require_once("./private/dashboard/fetch-stats.php");  // Grab the stats for the dashboard
+  require_once("./private/dashboard/fetch-food-stats.php");  // Grab the stats for the dashboard
 
   // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);
