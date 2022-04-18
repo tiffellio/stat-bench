@@ -15,7 +15,7 @@
     /**********TEMP VALS, REMEMBER TO UPDATE ************** */
     $ACTID = 9; // temporary global until account login is created
     $DATEID = $dateID;
-    echo "DATEID is".$dateID;
+ 
     // Fetch all food entered in the foodLog for todays date for our user
     $query = 'SELECT * FROM `stat_bench_3497853`.`foodLog` WHERE `actID` = "'.$ACTID.'" AND `dateID` = "'.$DATEID.'"';
     
@@ -23,9 +23,7 @@
 
     if (mysqli_num_rows($run) == 0) { 
 
-        $entries = 0;
-        
-        echo "No entries found. Log your food!";
+        $entries = 0; //No entries found
 
     } else {
 

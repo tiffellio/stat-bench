@@ -9,6 +9,9 @@ Date: July 2021 - 2022
   require_once("./private/dbinfo.inc.php"); // Grab db info
   require_once("./private/profileData/setDate.php"); // Checks if a date entry has been added to the database yet and creates one if not (my DB doesn't support crons so it's the best workaround I can think of...)
   require_once("./private/dashboard/fetch-food-stats.php");  // Grab the stats for the dashboard
+  require_once("./private/dashboard/fetch-exercise-stats.php");  // Grab the stats for the dashboard
+  require_once("./private/dashboard/fetch-sleep-stats.php");  // Grab the stats for the dashboard
+  require_once("./private/dashboard/fetch-summary-stats.php");  // Grab the stats for the dashboard
 
   // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);
@@ -61,7 +64,7 @@ Date: July 2021 - 2022
         calculated by BMR, (+) activity, (-) food -->
         <div class="item sub-container" id="calories">
           <div id="calories-label"> Calories </div>
-          <div id="calories-num"> 1500 </div>
+          <div id="calories-num"> <?php $totalCalsIn; ?> </div> <!-- why won't this update? -->
           <img src="media/icons/flame-icon.png">
         </div>
 
@@ -136,14 +139,48 @@ Date: July 2021 - 2022
         displaying type and calories burned -->
         <div class="label" id="exerlabel"> Exercise Log </div>
         <div class="item" id="exerlog">
-          Exercise
+          <?php
+
+          if($activityEntries == 0 ){
+
+            echo "Start logging your activity!";
+
+          } else {
+
+            $k = 1;
+
+            while ($k < $activityEntries){
+
+              echo 'Metcode: '.$metCode[$k].', Duration: '.$duration[$k].' minutes, Calories: '.$calsBurned[$k];
+              echo '<br>';
+              $k++;
+
+            }
+
+          }
+
+          ?>
         </div>
 
         <!-- ********** SLEEP LOG ********** -->
         <!-- Display a daily sleep journal-->
         <div class="item sleep-container" id="sleep">
           <div id="sleep-label"> Sleep </div>
-          <div id="sleep-num"> 7h 40m </div>
+          <div id="sleep-num">
+          <?php
+
+            if($sleepEntries <= 0 ){
+
+              echo "0H 0M";
+
+            } else {
+
+              echo $timeHr."h ".$timeMin."m";
+
+            }
+
+          ?>
+          </div>
           <img src="media/icons/moon-icon.png">
         </div>
 

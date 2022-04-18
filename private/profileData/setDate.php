@@ -10,26 +10,19 @@ if (mysqli_connect_error()){
 
     die("There was a problem connecting to the MySQL database: ".mysqli_connect_error());
 
-} else {
-
-    echo "Connection to new database was sucessful <br><br>";
-
-}
+} 
 
 
 //Get the current date with PHP
 $currentDate = date("Y-m-d");
 
-echo "Current date is ".$currentDate;
+//echo "Current date is ".$currentDate;
 
 
 //Check if the date exists in the dateLog table
 
-
 $dateID = getDateID($link, $currentDate);
-echo "The dateID for today is ".$dateID;
 
-// then check
 if ($dateID === 0){
 
     $NewdateID = createDate($link, $currentDate);
@@ -56,7 +49,7 @@ function getDateID($link, $currentDate){
 
         if (is_numeric($row[0])){
 
-            echo "DateID is ".$row[0]."<br";
+            //echo "DateID is ".$row[0]."<br";
 
             return $row[0];
 
@@ -100,7 +93,7 @@ function createDate($link, $currentDate){
 
         if(is_numeric($newID) && $newID > 0){
 
-            echo "The NEW DateID is ".$newID."<br";
+            //echo "The NEW DateID is ".$newID."<br";
 
             return $newID;
 
