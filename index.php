@@ -11,7 +11,7 @@ Date: July 2021 - 2022
   require_once("./private/dashboard/fetch-food-stats.php");  // Grab the stats for the dashboard
   require_once("./private/dashboard/fetch-exercise-stats.php");  // Grab the stats for the dashboard
   require_once("./private/dashboard/fetch-sleep-stats.php");  // Grab the stats for the dashboard
-  require_once("./private/dashboard/fetch-summary-stats.php");  // Grab the stats for the dashboard
+  require_once("./private/dashboard/fetch-calorie-stats.php");  // Grab the stats for the dashboard
 
   // Connect to database
   $link = mysqli_connect($host, $username, $password, $db_name);

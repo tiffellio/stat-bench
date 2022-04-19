@@ -30,8 +30,6 @@ $run = mysqli_query($link, $query) or die(mysqli_error($link));
 if (mysqli_num_rows($run) == 0) { 
 
     $sleepEntries = 0;
-    
-    echo "0h 0m";
 
 } else {
 
